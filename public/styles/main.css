@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: linear-gradient(to right, #004138, #008674);
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column; /* Change this to column for vertical stacking */
+}
+
+.box, .box2 {
+    width: 100%;
+    max-width: 1200px; 
+    padding: 20px;
+    margin: 0 auto; 
+}
+
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+.book-slider {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-container {
+    display: flex;
+    overflow-x: hidden; /* Hide scrollbars */
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 20px; 
+    width: 100%; 
+}
+
+
+.book-list {
+    display: flex;
+    gap:20px;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+
+.book-item {
+    flex: 0 0 200px;
+    scroll-snap-align: start;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+}
+.book-item:last-child {
+    border-right: none; /* Remove right border from last item */
+}
+
+.book-item img {
+    width: 100%;  /* Adjusts the width to take up the full width of the parent */
+    max-width: 250px; /* Set a maximum width for the image */
+    height: auto;  /* Maintains the aspect ratio */
+    margin-bottom: 10px;
+}
+
+
+
+
+.arrow {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+}
+
+
+.left-arrow {
+    left: 10px; /* Position left */
+}
+
+.right-arrow {
+    right: 10px; /* Position right */
+}
+
+a {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: #2ebf91;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+a:hover {
+    background-color: #45d3a4;
+}
+
+.book-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome/Safari/WebKit */
+}
+
+.book-container {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+@media (max-width: 600px) {
+    .book-item {
+        width: 150px; /* Smaller width for smaller screens */
+    }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+    .book-item {
+        width: 180px; /* Medium width for medium screens */
+    }
+}

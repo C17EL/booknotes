@@ -6,51 +6,86 @@ import pg from "pg";
 
 const app = express();
 
-
-
 const db = new pg.Client({
     user: "postgres",
     host: "localhost",
     database: "booknotes",
     password: "E.lov2938",
     port: 5432,
-  });
-  db.connect();
+});
+db.connect();
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
 app.get("/", async (req, res) => {
-const result = await db.query("SELECT * FROM books");
-res.render("index", { listItems: result.rows });
+  try {
+      // Fetch existing books and books to read from the database
+      const booksResult = await db.query("SELECT * FROM books");
+      const booksToReadResult = await db.query("SELECT * FROM books_to_read");
+
+      // Log the fetched data
+      console.log("Books:", booksResult.rows);
+      console.log("Books to Read:", booksToReadResult.rows);
+
+      // Render the index page with both lists
+      res.render("index", {
+          listItems: booksResult.rows,
+          booksToRead: booksToReadResult.rows // Pass the books to read to the template
+      });
+  } catch (err) {
+      console.error("Error fetching books:", err);
+      res.status(500).send("Internal Server Error");
+  }
 });
 
+
 app.get("/add", (req, res) => {
+    // Render the add book form
     res.render("add");
+});
+
+app.get("/add-book", (req, res) => {
+    // Render the add book form for the bottom list
+    res.render("add-book");
 });
 
 app.post("/add", async (req, res) => {
     const { title, author, isbn, notes } = req.body;
-
-    const cleanIsbn = isbn.replace(/[^0-9X]/gi, ''); // Remove dashes, spaces, etc.
-const coverUrl = `http://covers.openlibrary.org/b/isbn/${cleanIsbn}-L.jpg`;
+    const cover_url = `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg`; // Construct cover URL
 
 
-    await db.query("INSERT INTO books (title, author, isbn, cover_url, notes) VALUES ($1, $2, $3, $4, $5)", [title, author, isbn, coverUrl, notes]);
-    res.redirect("/");
+    // Insert into the books database
+    await db.query("INSERT INTO books (title, author, cover_url, notes) VALUES ($1, $2, $3, $4)", [title, author, cover_url, notes]);
+
+    res.redirect("/"); 
 });
+
+app.post("/add-book", async (req, res) => {
+  const { title, author, isbn, notes } = req.body;
+  const cover_url = `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg`; // Construct cover URL
+
+
+  // Insert into the books_to_read database
+  await db.query("INSERT INTO books_to_read (title, author, cover_url, notes) VALUES ($1, $2, $3, $4)", [title, author, cover_url, notes]);
+
+  res.redirect("/"); 
+});
+
 
 app.post("/delete", async (req, res) => {
     const id = req.body.deleteItemId;
-    try {
-      await db.query("DELETE FROM books WHERE id = $1", [id]);
-      res.redirect("/");
-    } catch (err) {
-      console.log(err);
-    }
-  });
 
+    try {
+        await db.query("DELETE FROM books WHERE id = $1", [id]);
+        res.redirect("/"); // Redirect after deletion
+    } catch (err) {
+        console.error("Error deleting book:", err);
+        res.status(500).send("Internal Server Error");
+    }
+});
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
-  });
+});
