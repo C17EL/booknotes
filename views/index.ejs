@@ -1,0 +1,26 @@
+
+<div class="box">
+    <% for(let book of listItems){%>
+<div class="item">
+    <form action="/delete" method="post">
+      <input type="hidden" name="deleteItemId" value="<%= book.id %>">
+      <button type="submit">Delete</button>
+    </form>
+</div>
+<% } %>
+
+<h1>Book Notes</h1>
+<ul>
+  <% listItems.forEach(book => { %>
+    <li>
+        <img src="<%= book.cover_url %>" alt="<%= book.title %> cover">
+
+
+      <h2><%= book.title %> by <%= book.author %></h2>
+      <p><%= book.notes %></p>
+    </li>
+  <% }) %>
+</ul>
+<a href="/add">Add a new book</a>
+</div>
+
