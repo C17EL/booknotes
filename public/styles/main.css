@@ -1,30 +1,68 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+
+
+.header {
+    background-color: #000000;
+    color: rgb(255, 237, 237); 
+    padding: 20px; 
+    text-align: center; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+    margin: 50px auto; 
+    margin-top:auto;
 }
 
 body {
-    background-image: linear-gradient(to right, #004138, #008674);
+    padding-top: 20px; 
+    background-image: linear-gradient(to right, #0e0e0e, #b11c1c);
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column; /* Change this to column for vertical stacking */
+    align-items: flex-start; 
+    min-height: 100vh; 
+    flex-direction: column;
+    margin: 0;
 }
+
 
 .box, .box2 {
     width: 100%;
     max-width: 1200px; 
     padding: 20px;
     margin: 0 auto; 
+    height: auto; /* Removed fixed height to allow natural height */
+    overflow-y: auto; /* Optional: enables scrolling if needed */
 }
 
+.dlt{
+    color: rgb(0, 0, 0);
+    cursor: pointer;  
+
+  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.dlt:hover {
+    background-color: #4b0000;  
+    transform: scale(1.05); 
+    color:#fff;    
+}
+
+.view {
+    color: rgb(0, 0, 0);
+    cursor: pointer;  
+    box-shadow: 0 4px 8px rgba(240, 163, 163, 0.2); 
+    transition: background-color 0.3s, transform 0.3s; 
+}
+
+.view:hover {
+    background-color: #e78686;  
+    transform: scale(1.05);     
+}
 
 h1 {
     text-align: center;
     color: white;
+    margin-top: 20px;
 }
 
 .book-slider {
@@ -54,13 +92,16 @@ h1 {
 
 
 .book-item {
+
     flex: 0 0 200px;
     scroll-snap-align: start;
     text-align: center;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 10px;
+    background-color: #ffffff56;
+    border: 1px solid #000000;
+    padding: 5px;
     border-radius: 8px;
+    height:500px;
+    overflow: hidden;
 }
 .book-item:last-child {
     border-right: none; /* Remove right border from last item */
@@ -70,7 +111,7 @@ h1 {
     width: 100%;  /* Adjusts the width to take up the full width of the parent */
     max-width: 250px; /* Set a maximum width for the image */
     height: auto;  /* Maintains the aspect ratio */
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 
@@ -98,18 +139,21 @@ h1 {
 }
 
 a {
-    display: block;
-    margin-top: 20px;
-    text-align: center;
-    text-decoration: none;
-    color: white;
-    background-color: #2ebf91;
-    padding: 10px;
-    border-radius: 5px;
+    display: block;                /* Ensures the anchor behaves like a block element */
+    margin: 50px auto;            /* Centers the anchor horizontally and adds top margin */
+    text-align: center;           /* Center text inside the anchor */
+    text-decoration: none;        /* Removes underline from links */
+    color: rgb(48, 0, 0);                 /* Text color */
+    background-color: #8f4f4f;    /* Background color */
+    padding: 20px;                /* Padding inside the anchor */
+    border-radius: 5px;           /* Rounded corners */
+    width: 50%;                   /* Width of the anchor (50% of its parent) */
+    max-width: 300px;             /* Maximum width of the anchor */
 }
 
+
 a:hover {
-    background-color: #45d3a4;
+    background-color: #ffe1e1;
 }
 
 .book-container::-webkit-scrollbar {
@@ -119,6 +163,56 @@ a:hover {
 .book-container {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+}
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+
+
+.title {
+    margin: 0; /* Remove margin for the title */
+    font-size: 2.5em; /* Title font size */
+}
+
+.p {
+    margin: 10px 0 0; /* Add margin to paragraph */
+    font-size: 1.2em; /* Paragraph font size */
 }
 
 @media (max-width: 600px) {

@@ -7,9 +7,10 @@
     <title>Book Notes</title>
 </head>
 <body>
+    <%- include('partials/header.ejs') %>
 
 <div class="box">
-    <h1>Book Notes</h1>
+   
     <div class="book-slider">
         <button class="arrow left-arrow" onclick="slide(-1)">&#10094;</button> <!-- Left arrow -->
 
@@ -19,13 +20,13 @@
                     <li class="book-item">
                         <img src="<%= book.cover_url %>" alt="<%= book.title %> cover">
                         <h2><%= book.title %> by <%= book.author %></h2>
-                        <button class="view-button" onclick="toggleNotes(this)">View</button> 
+                        <button class="view" onclick='openModal({title: "<%= book.title %>", cover_url: "<%= book.cover_url %>", notes: "<%= book.notes %>"})'>View</button>
                         <div class="notes-container" style="display: none;">
                             <p><%= book.notes %></p>
                         </div>
                         <form action="/delete" method="post">
                             <input type="hidden" name="deleteItemId" value="<%= book.id %>">
-                            <button type="submit">Delete</button>
+                            <button class="dlt" type="submit">Delete</button>
                         </form>
                     </li>
                 <% }) %>
@@ -50,13 +51,13 @@
                     <li class="book-item">
                         <img src="<%= book.cover_url %>" alt="<%= book.title %> cover">
                         <h2><%= book.title %> by <%= book.author %></h2>
-                        <button class="view-button" onclick="toggleNotes(this)">View</button> 
+                        <button class="view" onclick='openModal({title: "<%= book.title %>", cover_url: "<%= book.cover_url %>", notes: "<%= book.notes %>"})'>View</button> 
                         <div class="notes-container" style="display: none;">
                             <p><%= book.notes %></p>
                         </div>
-                        <form action="/delete" method="post">
+                        <form action="/delete-book-to-read" method="post">
                             <input type="hidden" name="deleteItemId" value="<%= book.id %>">
-                            <button type="submit">Delete</button>
+                            <button class="dlt" type="submit">Delete</button>
                         </form>
                     </li>
                 <% }) %>
@@ -69,6 +70,16 @@
         <a href="/add-book">Add a new book</a>
     </div>
 </div>
+<!-- Modal Structure -->
+<div id="bookModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <h2 id="modalBookTitle"></h2>
+        <img id="modalBookCover" src="" alt="Cover" />
+        <p id="modalBookDescription"></p>
+    </div>
+</div>
+
 
 <script>
 // Get all book sliders on the page
@@ -94,6 +105,29 @@ bookSliders.forEach(slider => {
         });
     });
 });
+
+
+function openModal(book) {
+    document.getElementById("modalBookTitle").innerText = book.title;
+    document.getElementById("modalBookCover").src = book.cover_url;
+    document.getElementById("modalBookDescription").innerText = book.notes; // Assuming `notes` contains the description
+    document.getElementById("bookModal").style.display = "block";
+    document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+    document.getElementById("bookModal").style.display = "none";
+    document.body.style.overflow = "";
+}
+
+// To close the modal when clicking outside of the modal content
+window.onclick = function(event) {
+    const modal = document.getElementById("bookModal");
+    if (event.target === modal) {
+        closeModal();
+    }
+}
+
 </script>
 </body>
 </html>

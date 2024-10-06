@@ -26,8 +26,6 @@ app.get("/", async (req, res) => {
       const booksToReadResult = await db.query("SELECT * FROM books_to_read");
 
       // Log the fetched data
-      console.log("Books:", booksResult.rows);
-      console.log("Books to Read:", booksToReadResult.rows);
 
       // Render the index page with both lists
       res.render("index", {
@@ -82,6 +80,32 @@ app.post("/delete", async (req, res) => {
         res.redirect("/"); // Redirect after deletion
     } catch (err) {
         console.error("Error deleting book:", err);
+        res.status(500).send("Internal Server Error");
+    }
+});
+app.post("/delete-book-to-read", async (req, res) => {
+    const id = req.body.deleteItemId;
+
+    // Check if id is actually being passed
+    if (!id) {
+        console.error("No id provided in the request.");
+        return res.status(400).send("Bad Request: No id provided");
+    }
+
+    try {
+        const result = await db.query("DELETE FROM books_to_read WHERE id = $1", [id]);
+
+        // Log query results for debugging
+        console.log("Delete query result:", result);
+
+        if (result.rowCount === 0) {
+            console.error("No book found with the provided id.");
+            return res.status(404).send("Not Found: No book with this id");
+        }
+
+        res.redirect("/"); // Redirect after deletion
+    } catch (err) {
+        console.error("Error deleting book from books_to_read:", err);
         res.status(500).send("Internal Server Error");
     }
 });
