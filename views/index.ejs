@@ -47,7 +47,7 @@
 
         <div class="book-container">
             <ul class="book-list">
-                <% booksToRead.forEach(book => { %> <!-- Corrected to use booksToRead -->
+                <% booksToRead.forEach(book => { %>
                     <li class="book-item">
                         <img src="<%= book.cover_url %>" alt="<%= book.title %> cover">
                         <h2><%= book.title %> by <%= book.author %></h2>
@@ -87,21 +87,21 @@ const bookSliders = document.querySelectorAll('.book-slider');
 
 bookSliders.forEach(slider => {
     const bookContainer = slider.querySelector('.book-container');
-    const bookItemWidth = 200 + 10; // Width of book item + gap
+    const bookItemWidth = 200 + 10; 
     
-    // Attach event listener to left arrow
+    
     slider.querySelector('.left-arrow').addEventListener('click', () => {
         bookContainer.scrollBy({
-            left: -bookItemWidth, // Scroll to the left by one item width
-            behavior: 'smooth' // Smooth scrolling
+            left: -bookItemWidth, 
+            behavior: 'smooth' 
         });
     });
 
     // Attach event listener to right arrow
     slider.querySelector('.right-arrow').addEventListener('click', () => {
         bookContainer.scrollBy({
-            left: bookItemWidth, // Scroll to the right by one item width
-            behavior: 'smooth' // Smooth scrolling
+            left: bookItemWidth, 
+            behavior: 'smooth'
         });
     });
 });

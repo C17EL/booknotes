@@ -28,8 +28,8 @@ body {
     max-width: 1200px; 
     padding: 20px;
     margin: 0 auto; 
-    height: auto; /* Removed fixed height to allow natural height */
-    overflow-y: auto; /* Optional: enables scrolling if needed */
+    height: auto; 
+    overflow-y: auto; 
 }
 
 .dlt{
@@ -74,7 +74,7 @@ h1 {
 
 .book-container {
     display: flex;
-    overflow-x: hidden; /* Hide scrollbars */
+    overflow-x: hidden; 
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     gap: 20px; 
@@ -104,13 +104,13 @@ h1 {
     overflow: hidden;
 }
 .book-item:last-child {
-    border-right: none; /* Remove right border from last item */
+    border-right: none; 
 }
 
 .book-item img {
-    width: 100%;  /* Adjusts the width to take up the full width of the parent */
-    max-width: 250px; /* Set a maximum width for the image */
-    height: auto;  /* Maintains the aspect ratio */
+    width: 100%;  
+    max-width: 250px; 
+    height: auto; 
     margin-bottom: 5px;
 }
 
@@ -131,24 +131,24 @@ h1 {
 
 
 .left-arrow {
-    left: 10px; /* Position left */
+    left: 10px; 
 }
 
 .right-arrow {
-    right: 10px; /* Position right */
+    right: 10px; 
 }
 
 a {
-    display: block;                /* Ensures the anchor behaves like a block element */
-    margin: 50px auto;            /* Centers the anchor horizontally and adds top margin */
-    text-align: center;           /* Center text inside the anchor */
-    text-decoration: none;        /* Removes underline from links */
-    color: rgb(48, 0, 0);                 /* Text color */
-    background-color: #8f4f4f;    /* Background color */
-    padding: 20px;                /* Padding inside the anchor */
-    border-radius: 5px;           /* Rounded corners */
-    width: 50%;                   /* Width of the anchor (50% of its parent) */
-    max-width: 300px;             /* Maximum width of the anchor */
+    display: block;               
+    margin: 50px auto;            
+    text-align: center;           
+    text-decoration: none;        
+    color: rgb(48, 0, 0);                 
+    background-color: #8f4f4f;    
+    padding: 20px;                
+    border-radius: 5px;           
+    width: 50%;                   
+    max-width: 300px;          
 }
 
 
@@ -157,33 +157,33 @@ a:hover {
 }
 
 .book-container::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for Chrome/Safari/WebKit */
+    display: none; 
 }
 
 .book-container {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
 }
 
 
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.5); 
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 80%; 
 }
 
 
@@ -206,23 +206,23 @@ a:hover {
 
 
 .title {
-    margin: 0; /* Remove margin for the title */
-    font-size: 2.5em; /* Title font size */
+    margin: 0; 
+    font-size: 2.5em;
 }
 
 .p {
-    margin: 10px 0 0; /* Add margin to paragraph */
-    font-size: 1.2em; /* Paragraph font size */
+    margin: 10px 0 0; 
+    font-size: 1.2em; 
 }
 
 @media (max-width: 600px) {
     .book-item {
-        width: 150px; /* Smaller width for smaller screens */
+        width: 150px; 
     }
 }
 
 @media (min-width: 601px) and (max-width: 900px) {
     .book-item {
-        width: 180px; /* Medium width for medium screens */
+        width: 180px; 
     }
 }
